@@ -1,0 +1,21 @@
+{
+  "name": "bitosheet",
+  "version": "1.0.0",
+  "description": "Get started by customizing your environment (defined in the .idx/dev.nix file) with the tools and IDE extensions you'll need for your project!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "multer": "^1.4.5-lts.2",
+    "nodemon": "^3.1.10",
+    "xlsx": "^0.18.5"
+  }
+}
