@@ -21,7 +21,7 @@
     >
       <div class="mb-3">
         <label for="formFile" class="form-label">Nhập file BI</label>
-        <input class="form-control" type="file" name="myfile" />
+        <input class="form-control" type="file" name="myfile" required />
       </div>
       <div class="mb-3">
         <button id="submitBtn" type="submit" class="btn btn-primary mb-3">
@@ -42,14 +42,69 @@
         </button>
       </div>
     </form>
+    <hr />
+    <form id="serviceForm" action="/service" method="POST">
+      <div class="mb-3">
+        <label class="form-label">Nhập dữ liệu dịch vụ (Khác BI)</label>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nhập từ ngày</label>
+        <input type="date" class="form-control" name="startDate" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nhập đến ngày</label>
+        <input type="date" class="form-control" name="endDate" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Dịch vụ</label>
+        <select class="form-select" name="dichVu" required>
+          <option selected value="">Chọn dịch vụ</option>
+          <option value="Xổ số">Xổ số</option>
+          <option value="Nội bộ SEO + Voucher">Nội bộ SEO + Voucher</option>
+          <option value="Thu hộ khác (Giáo dục, TMĐT, DN, Voucher, Gotit...)">
+            Thu hộ khác (Giáo dục, TMĐT, DN, Voucher, Gotit...)
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Thực hiện</label>
+        <input type="text" class="form-control" name="thucHien" required />
+      </div>
+      <div class="mb-3">
+        <button id="submitBtn1" type="submit" class="btn btn-primary mb-3">
+          Đẩy dữ liệu
+        </button>
+        <button
+          id="loadingBtn1"
+          class="btn btn-primary mb-3"
+          type="button"
+          style="display: none"
+          disabled
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            aria-hidden="true"
+          ></span>
+          <span role="status">Vui lòng chờ</span>
+        </button>
+      </div>
+    </form>
     <script>
       const form = document.getElementById("uploadForm");
+      const form1 = document.getElementById("serviceForm");
       const submitBtn = document.getElementById("submitBtn");
       const loadingBtn = document.getElementById("loadingBtn");
+      const submitBtn1 = document.getElementById("submitBtn1");
+      const loadingBtn1 = document.getElementById("loadingBtn1");
 
       form.addEventListener("submit", () => {
         submitBtn.style.display = "none";
         loadingBtn.style.display = "inline-block";
+      });
+
+      form1.addEventListener("submit", () => {
+        submitBtn1.style.display = "none";
+        loadingBtn1.style.display = "inline-block";
       });
     </script>
   </body>

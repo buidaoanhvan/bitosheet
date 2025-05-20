@@ -1,4 +1,6 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const dayjs = require("dayjs");
 const multer = require("multer");
 const xlsx = require("xlsx");
 const fs = require("fs");
@@ -8,6 +10,7 @@ const app = express();
 const port = 3000;
 
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: false }));
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -58,6 +61,31 @@ app.post("/data", upload.single("myfile"), async (req, res) => {
   }
 });
 
+app.post("/service", async (req, res) => {
+  try {
+    const startDate = dayjs(req.body.startDate);
+    const endDate = dayjs(req.body.endDate);
+    const diffDays = endDate.diff(startDate, "day") + 1;
+    const payLoad = [];
+    for (let i = 0; i < diffDays; i++) {
+      const currentDay = startDate.add(i, "day");
+      payLoad.push({
+        dichVu: req.body.dichVu,
+        thucHien: (parseInt(req.body.thucHien) / diffDays).toFixed(2),
+        ngay: currentDay.format("MM/DD/YYYY"),
+        thangNam: currentDay.format("MM/YYYY"),
+      });
+    }
+    for (const item of payLoad) {
+      await callApiSheet(item);
+    }
+    res.redirect("/success");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/fail");
+  }
+});
+
 const formatDate = (value, type) => {
   const str = value.toString();
   const year = str.substring(0, 4);
@@ -98,7 +126,7 @@ const getValueService = (name, col, worksheet, range) => {
     data.push({
       dichVu: name,
       thucHien: cellThuhien
-        ? parseFloat(cellThuhien.v / 1000000).toFixed(0)
+        ? parseFloat(cellThuhien.v / 1000000).toFixed(2)
         : null,
       ngay: cellNgay ? formatDate(cellNgay.v, "date") : null,
       thangNam: cellNgay ? formatDate(cellNgay.v) : null,
