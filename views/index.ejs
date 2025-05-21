@@ -9,93 +9,245 @@
       integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Cập nhật số liệu</title>
   </head>
 
   <body class="container py-3">
-    <form
-      id="uploadForm"
-      action="/data"
-      method="POST"
-      enctype="multipart/form-data"
-    >
-      <div class="mb-3">
-        <label for="formFile" class="form-label">Nhập file BI</label>
-        <input class="form-control" type="file" name="myfile" required />
-      </div>
-      <div class="mb-3">
-        <button id="submitBtn" type="submit" class="btn btn-primary mb-3">
-          Đẩy dữ liệu
-        </button>
-        <button
-          id="loadingBtn"
-          class="btn btn-primary mb-3"
-          type="button"
-          style="display: none"
-          disabled
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Cập nhật dữ liệu BI
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          data-bs-parent="#accordionExample"
         >
-          <span
-            class="spinner-border spinner-border-sm"
-            aria-hidden="true"
-          ></span>
-          <span role="status">Vui lòng chờ</span>
-        </button>
+          <div class="accordion-body">
+            <form
+              id="uploadForm"
+              action="/data"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Nhập file BI</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  name="myfile"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <button
+                  id="submitBtn"
+                  type="submit"
+                  class="btn btn-primary mb-3"
+                >
+                  Đẩy dữ liệu
+                </button>
+                <button
+                  id="loadingBtn"
+                  class="btn btn-primary mb-3"
+                  type="button"
+                  style="display: none"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                  <span role="status">Vui lòng chờ</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </form>
-    <hr />
-    <form id="serviceForm" action="/service" method="POST">
-      <div class="mb-3">
-        <label class="form-label">Nhập dữ liệu dịch vụ (Khác BI)</label>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Nhập từ ngày</label>
-        <input type="date" class="form-control" name="startDate" required />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Nhập đến ngày</label>
-        <input type="date" class="form-control" name="endDate" required />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Dịch vụ</label>
-        <select class="form-select" name="dichVu" required>
-          <option selected value="">Chọn dịch vụ</option>
-          <option value="Xổ số">Xổ số</option>
-          <option value="Nội bộ SEO + Voucher">Nội bộ SEO + Voucher</option>
-          <option value="Thu hộ khác (Giáo dục, TMĐT, DN, Voucher, Gotit...)">
-            Thu hộ khác (Giáo dục, TMĐT, DN, Voucher, Gotit...)
-          </option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Thực hiện</label>
-        <input type="text" class="form-control" name="thucHien" required />
-      </div>
-      <div class="mb-3">
-        <button id="submitBtn1" type="submit" class="btn btn-primary mb-3">
-          Đẩy dữ liệu
-        </button>
-        <button
-          id="loadingBtn1"
-          class="btn btn-primary mb-3"
-          type="button"
-          style="display: none"
-          disabled
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            Cập nhật dữ liệu khác
+          </button>
+        </h2>
+        <div
+          id="collapseTwo"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
         >
-          <span
-            class="spinner-border spinner-border-sm"
-            aria-hidden="true"
-          ></span>
-          <span role="status">Vui lòng chờ</span>
-        </button>
+          <div class="accordion-body">
+            <form id="serviceForm" action="/service" method="POST">
+              <div class="mb-3">
+                <label class="form-label">Nhập từ ngày</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="startDate"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nhập đến ngày</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="endDate"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Dịch vụ</label>
+                <select class="form-select" name="dichVu" required>
+                  <option selected value="">Chọn dịch vụ</option>
+                  <option value="Xổ số">Xổ số</option>
+                  <option value="Nội bộ SEO + Voucher">
+                    Nội bộ SEO + Voucher
+                  </option>
+                  <option
+                    value="Thu hộ khác (Giáo dục, TMĐT, DN, Voucher, Gotit...)"
+                  >
+                    Thu hộ khác (Giáo dục, TMĐT, DN, Voucher, Gotit...)
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Thực hiện</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="thucHien"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <button
+                  id="submitBtn1"
+                  type="submit"
+                  class="btn btn-primary mb-3"
+                >
+                  Đẩy dữ liệu
+                </button>
+                <button
+                  id="loadingBtn1"
+                  class="btn btn-primary mb-3"
+                  type="button"
+                  style="display: none"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                  <span role="status">Vui lòng chờ</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </form>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseThree"
+            aria-expanded="false"
+            aria-controls="collapseThree"
+          >
+            Cập nhật dữ liệu thuê bao
+          </button>
+        </h2>
+        <div
+          id="collapseThree"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <form id="subscriptionForm" action="/subscription" method="POST">
+              <div class="mb-3">
+                <label class="form-label">Nhập ngày</label>
+                <input type="date" class="form-control" name="date" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Dịch vụ</label>
+                <select class="form-select" name="dichVu" required>
+                  <option selected value="">Chọn dịch vụ</option>
+                  <option value="Thu hộ điện">Thu hộ điện</option>
+                  <option value="Thu hộ nước">Thu hộ nước</option>
+                  <option value="Thu hộ tài chính bảo hiểm">
+                    Thu hộ tài chính bảo hiểm
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Thực hiện</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="thucHien"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <button
+                  id="submitBtn2"
+                  type="submit"
+                  class="btn btn-primary mb-3"
+                >
+                  Đẩy dữ liệu
+                </button>
+                <button
+                  id="loadingBtn2"
+                  class="btn btn-primary mb-3"
+                  type="button"
+                  style="display: none"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                  <span role="status">Vui lòng chờ</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
     <script>
       const form = document.getElementById("uploadForm");
       const form1 = document.getElementById("serviceForm");
+      const form2 = document.getElementById("subscriptionForm");
       const submitBtn = document.getElementById("submitBtn");
       const loadingBtn = document.getElementById("loadingBtn");
       const submitBtn1 = document.getElementById("submitBtn1");
       const loadingBtn1 = document.getElementById("loadingBtn1");
+      const submitBtn2 = document.getElementById("submitBtn2");
+      const loadingBtn2 = document.getElementById("loadingBtn2");
 
       form.addEventListener("submit", () => {
         submitBtn.style.display = "none";
@@ -105,6 +257,11 @@
       form1.addEventListener("submit", () => {
         submitBtn1.style.display = "none";
         loadingBtn1.style.display = "inline-block";
+      });
+
+      form2.addEventListener("submit", () => {
+        submitBtn2.style.display = "none";
+        loadingBtn2.style.display = "inline-block";
       });
     </script>
   </body>

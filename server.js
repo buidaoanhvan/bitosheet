@@ -86,6 +86,22 @@ app.post("/service", async (req, res) => {
   }
 });
 
+app.post("/subscription", async (req, res) => {
+  try {
+    const date = dayjs(req.body.date);
+    await callApiSheet2({
+      dichVu: req.body.dichVu,
+      thucHien: parseInt(req.body.thucHien),
+      ngay: date.format("MM/DD/YYYY"),
+      thangNam: date.format("MM/YYYY"),
+    });
+    res.redirect("/success");
+  } catch (error) {
+    console.log(error);
+    res.redirect("/fail");
+  }
+});
+
 const formatDate = (value, type) => {
   const str = value.toString();
   const year = str.substring(0, 4);
@@ -102,7 +118,27 @@ const callApiSheet = async (data) => {
   let config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "https://script.google.com/macros/s/AKfycbxBLF-Oggyw7DSBHiEPGp03ZpXHfYyqkDfkQ-sPUDlnr5nhiOX-Q7PHCwYQQdbkvuEq/exec",
+    url: "https://script.google.com/macros/s/AKfycbz9bFFpFDVxPkREZMrLLfueEr7kFVpetws8tAb71HzRzkGCwV4E3FhFp6zq2Ql4dhA/exec",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(data),
+  };
+  await axios
+    .request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const callApiSheet2 = async (data) => {
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: "https://script.google.com/macros/s/AKfycbwQamL_VpiX39FDnkuKvsQ4-cMR3w4hgxiW2iMmxVCBv6lVR6NH2pvTcet9veJ0U754/exec",
     headers: {
       "Content-Type": "application/json",
     },
